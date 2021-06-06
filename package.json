@@ -1,0 +1,29 @@
+{
+  "name": "getstats-lab",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "description": "Just another space where we will play with getStats for different browser vendors and versions",
+  "scripts": {
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "watch-run": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ObserveRTC/getstats-lab.git"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "eslint": "^7.28.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "bugs": {
+    "url": "https://github.com/ObserveRTC/getstats-lab/issues"
+  },
+  "homepage": "https://github.com/ObserveRTC/getstats-lab#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "selenium-webdriver": "^4.0.0-beta.3"
+  }
+}
