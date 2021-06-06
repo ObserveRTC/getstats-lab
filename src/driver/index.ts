@@ -5,7 +5,7 @@ const capabilities = {
     'os' : 'Windows',
     'os_version' : '10',
     'browserName' : 'Chrome',
-    'browser_version' : '87.0',
+    'browser_version' : '87.0', // change browser version here
     'name' : 'Janus echo test',
     'browserstack.user': userName(),
     'browserstack.key': userKey(),
