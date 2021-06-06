@@ -4,15 +4,26 @@ import {userName, userKey} from '../config'
 const capabilities = {
     'os' : 'Windows',
     'os_version' : '10',
-    'browserName' : 'Chrome',
-    'browser_version' : '87.0', // change browser version here
+    'browserName' : 'Edge',
+    'browser_version' : '91', // change browser version here
     'name' : 'Janus echo test',
     'browserstack.user': userName(),
     'browserstack.key': userKey(),
     'browserstack.local': 'false',
-    'goog:chromeOptions': {
+    'ms:edgeOptions': {
         'args': ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream']
     }
+    /*'moz:firefoxOptions': {
+        prefs: {
+            'media.navigator.streams.fake': true,
+            'media.navigator.permission.disabled': true,
+            'media.autoplay.default': 0,
+            'media.volume_scale': '0.0'
+        }
+    }*/
+    /*'goog:chromeOptions': {
+        'args': ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream']
+    }*/
 }
 
 console.warn('->','browser stack url', capabilities)
