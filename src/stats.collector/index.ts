@@ -5,6 +5,10 @@ import {wait} from '../helper.utils'
 class StatsCollector {
     runStatsCollector = async ({demoApp, driver, times = 5}: {driver: ThenableWebDriver, demoApp: JanusEchotestStats, times: number}): Promise<unknown> => {
         const statsList = []
+        await demoApp.runApp(driver)
+        // wait for 5 second
+        await wait(5)
+
         for(let i = 0; i < times; i+= 1) {
             console.warn('>', 'gathering stats')
             await driver.executeScript(demoApp.gatherStats)

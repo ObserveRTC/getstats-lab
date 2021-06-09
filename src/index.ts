@@ -45,9 +45,6 @@ const run = async () => {
         browser_version: version
     })
     try {
-        await demoApp.runApp(driver)
-        // wait for 5 second
-        await wait(5)
         const result = await statsCollector.runStatsCollector({
             demoApp, driver, times: 5
         })
