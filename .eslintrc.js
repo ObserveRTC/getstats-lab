@@ -22,6 +22,8 @@ module.exports = {
                 "ignoreParameters": true
             }
         ],
-        "@typescript-eslint/no-unused-vars": "warn"
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
     },
 };

@@ -1,84 +1,64 @@
-import './config'
-import {driver} from './driver'
-import {By} from 'selenium-webdriver'
+import { Command } from 'commander'
+import {JanusEchotestStats} from './janus.echotest.stats'
+import {StatsCollector} from './stats.collector'
+import {getDriver} from './driver'
+import {wait} from './helper.utils'
 
-const wait = (timeInSecond: number = 10) => new Promise((resolve) => setTimeout(resolve, timeInSecond*1000))
-const saveAwait = async (fn: any) => {
-    try {
-        await fn()
-    } catch (err) {
-        console.error(err)
-    }
-}
+const program = new Command('Argument parser')
 
-const gatherStats = () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const statsType = ['codec',
-        'inbound-rtp',
-        'outbound-rtp',
-        'remote-inbound-rtp',
-        'remote-outbound-rtp',
-        'media-source',
-        'csrc',
-        'peer-connection',
-        'data-channel',
-        'stream',
-        'track',
-        'transceiver',
-        'sender',
-        'receiver',
-        'transport',
-        'sctp-transport',
-        'candidate-pair',
-        'local-candidate',
-        'remote-candidate',
-        'certificate',
-        'ice-server']
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const pc = window.echotest.webrtcStuff.pc
-    const stats = async () => {
-        const statsList = [...await pc.getStats()]
-            .filter( item => statsType.includes(item[1].type))
-            .map( item => item[1])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        window.currentStats = statsList
-    }
-    stats().then(null).catch(null)
-}
-
-const collectStats = () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return window.currentStats
-}
-
-const runStatsCollector = async (times: number = 5) => {
-    const statsList = []
-    for(let i = 0; i < times; i+= 1) {
-        await driver.executeScript(gatherStats)
-        const result = await driver.executeScript(collectStats)
-        if(result) {
-            statsList.push( result)
-        }
-        // wait for 3 second
-        await wait(3)
-    }
-    return statsList
-}
+program.option('-b --browser', 'browser vendor name','Chrome')
+program.option('-v --version', 'browser version', '90')
+program.option('-u --username', 'BrowserStack username', 'a valid browser stack username')
+program.option('-k --key', 'BrowserStack key', 'a valid browser stack key')
 
 const run = async () => {
-    await driver.get('https://janus.conf.meetecho.com/echotest.html')
-    await saveAwait(async ()=>{
-        await driver.findElement(By.id('start')).click()
+    await program.parseAsync()
+    const {browser, version, username, key} = program.opts()
+
+    if(!browser) {
+        console.log('browser vendor name is missing!')
+        program.help()
+        return
+    }
+    if(!version) {
+        console.log('browser version is missing!')
+        program.help()
+        return
+    }
+    if(!username) {
+        console.log('BrowserStack username is missing!')
+        program.help()
+        return
+    }
+    if(!key) {
+        console.log('BrowserStack key!')
+        program.help()
+        return
+    }
+
+    const demoApp = new JanusEchotestStats()
+    const statsCollector = new StatsCollector()
+    const driver = getDriver({
+        userKey: key,
+        userName: username,
+        browserName: browser,
+        browser_version: version
     })
-    // wait for 5 second
-    await wait(5)
-    const result = await runStatsCollector(5)
-    console.warn(result[result.length -1 ])
-    await driver.quit()
+    try {
+        await demoApp.runApp(driver)
+        // wait for 5 second
+        await wait(5)
+        const result = await statsCollector.runStatsCollector({
+            demoApp, driver, times: 5
+        })
+        console.warn(result)
+    } catch (err) {
+        console.error(err)
+    } finally {
+        await driver.quit()
+    }
+
+
 }
 
 run().then(null).catch(console.error)

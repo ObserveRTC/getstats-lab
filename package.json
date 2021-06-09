@@ -4,9 +4,7 @@
   "main": "src/index.ts",
   "description": "Just another space where we will play with getStats for different browser vendors and versions",
   "scripts": {
-    "build-ts": "tsc",
-    "watch-ts": "tsc -w",
-    "watch-run": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -24,7 +22,7 @@
   },
   "homepage": "https://github.com/ObserveRTC/getstats-lab#readme",
   "dependencies": {
-    "dotenv": "^10.0.0",
+    "commander": "^7.2.0",
     "selenium-webdriver": "^4.0.0-beta.3"
   }
 }
