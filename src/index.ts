@@ -2,7 +2,6 @@ import { Command } from 'commander'
 import {JanusEchotestStats} from './janus.echotest.stats'
 import {StatsCollector} from './stats.collector'
 import {getDriver} from './driver'
-import {wait} from './helper.utils'
 
 const program = new Command('Argument parser')
 
