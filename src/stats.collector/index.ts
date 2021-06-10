@@ -10,9 +10,9 @@ class StatsCollector {
         await wait(5)
 
         for(let i = 0; i < times; i+= 1) {
-            console.warn('>', 'gathering stats')
+            console.warn('>', 'gathering stats', i)
             await driver.executeScript(demoApp.gatherStats)
-            console.warn('>', 'collecting stats')
+            console.warn('>', 'collecting stats', i)
             const result = await driver.executeScript(demoApp.collectStats)
             if(result) {
                 statsList.push( result)

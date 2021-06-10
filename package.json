@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ObserveRTC/getstats-lab#readme",
   "dependencies": {
+    "@replit/database": "github:mrlapizgithub/repl.it-db",
     "commander": "^7.2.0",
     "selenium-webdriver": "^4.0.0-beta.3"
   }
