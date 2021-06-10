@@ -5,7 +5,7 @@
   "description": "Just another space where we will play with getStats for different browser vendors and versions",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .."
   },
   "repository": {
     "type": "git",
