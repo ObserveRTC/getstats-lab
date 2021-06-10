@@ -1,15 +1,16 @@
-import Client from '@replit/database'
+const jsoning = require('jsoning')
+
+
 class ReplitDB {
-    private readonly client;
-    constructor(replitDbUrl: string) {
-        this.client = new Client(replitDbUrl)
+    private readonly client: any
+    constructor() {
+        this.client = new jsoning('database.json')
     }
     private key = ({browser, version}: {browser: string, version: string}) : string => {
         return `${browser}-${version}`
     }
     hasRecord = async ({browser, version}: {browser: string, version: string}): Promise<boolean> => {
-        const value =  await this.client.get( this.key({browser,version}) )
-        return !!value
+        return await this.client.has( this.key({browser,version}) )
     }
 
     getRecord = async ({browser, version}: {browser: string, version: string}): Promise<unknown> => {
@@ -22,4 +23,5 @@ class ReplitDB {
     }
 }
 
-export { ReplitDB }
+const db = new ReplitDB()
+export { db }

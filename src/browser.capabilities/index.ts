@@ -32,9 +32,13 @@ const defaultCapabilities = {
 }
 
 type capabilities = typeof defaultCapabilities
-type browser = {
+export type browser = {
     name: string
     version: string
+}
+
+const isEqual = (left: string, right: string): boolean => {
+    return left.toLowerCase() === right.toLowerCase()
 }
 
 export const getBrowserCapabilities = ({
@@ -43,13 +47,13 @@ export const getBrowserCapabilities = ({
     userKey, userName
 }: {browserName: SuppoertedBrowsers, browser_version: string, userName: string, userKey: string}): capabilities => {
     let mediaOptions = {}
-    if(browserName === 'Chrome') {
+    if(isEqual(browserName,'Chrome')) {
         mediaOptions = chromeBypassUserMediaOptions
-    } else if(browserName === 'Edge') {
+    } else if(isEqual(browserName,'Edge')) {
         mediaOptions = edgeBypassUserMediaOptions
-    } else if(browserName === 'Firefox') {
+    } else if(isEqual(browserName, 'Firefox')) {
         mediaOptions = firefoxBypassUserMediaOptions
-    } else if(browserName === 'Safari') {
+    } else if(isEqual(browserName , 'Safari')) {
         throw new Error('not implemented')
     }
 

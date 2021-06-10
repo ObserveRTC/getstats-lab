@@ -12,8 +12,8 @@ class StatsCollector {
         for(let i = 0; i < times; i+= 1) {
             console.warn('>', 'gathering stats', i)
             await driver.executeScript(demoApp.gatherStats)
-            console.warn('>', 'collecting stats', i)
             const result = await driver.executeScript(demoApp.collectStats)
+            console.warn('>', 'collecting stats', i)
             if(result) {
                 statsList.push( result)
             }
@@ -21,7 +21,6 @@ class StatsCollector {
             await wait(3)
         }
         // just return the last stats
-        console.warn('>','return last known stats')
         return statsList?.[statsList.length -1 ]
     }
 }
