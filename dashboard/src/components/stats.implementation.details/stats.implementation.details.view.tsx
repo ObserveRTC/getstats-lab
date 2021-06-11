@@ -1,6 +1,10 @@
 import React from "react";
+import {StatsDetails} from "../../redux/root.slice";
 
-const StatsImplementationDetailsView = (): React.ReactElement => {
+export type StatsImplementationDetailsViewProps = {
+    statsList: StatsDetails | undefined
+}
+const StatsImplementationDetailsView = ({statsList}: StatsImplementationDetailsViewProps): React.ReactElement => {
     return (
         <div>
             <>Browser vendor</>

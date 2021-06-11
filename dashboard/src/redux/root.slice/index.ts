@@ -7,10 +7,13 @@ export type BrowserDetail = {
     browser: string
     version: string
 }
+export type StatsDetails = {
+    [key: string] : Array<string>
+}
 
 export interface AppState {
     supportedBrowserList: BrowserDetail[],
-    stats: Record<string, unknown>
+    stats: Record<string, StatsDetails>
 }
 
 const initialState: AppState = {
@@ -21,7 +24,7 @@ const initialState: AppState = {
 const backendURL = 'http://localhost:8080'
 export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
     'app/browserImplementationDetails',
-    async ({browser, version}: {browser: string, version: string}, {rejectWithValue}) => {
+    async ({browser, version}: BrowserDetail, {rejectWithValue}) => {
         try{
             const { data } = await axios.get(`${backendURL}/stats/browser/${browser}/version/${version}`)
             return data
@@ -46,6 +49,6 @@ export const appSlice = createSlice({
   },
 });
 
-export const selectBrowserList = (state: RootState) => state.app.supportedBrowserList
-//export const selectImplementationDetails = ({app}: RootState) => app.stats
+export const selectBrowserList = ({app: {supportedBrowserList}}: RootState) => supportedBrowserList
+export const selectImplementationDetails = ({browser, version}: BrowserDetail) => ({app: {stats}}: RootState) => stats[`${browser}-${version}`]
 export const {reducer} = appSlice;
