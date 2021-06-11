@@ -8,6 +8,8 @@ import {
 import {About} from './components/about';
 import {Home} from './components/home';
 import { NotFound404 } from './components/NotFound404';
+import {StatsImplementationDetails} from "./components/stats.implementation.details";
+import {StatsImplementationReports} from "./components/stats.implementation.reports";
 
 const App = () => (
   <Router>
@@ -17,6 +19,8 @@ const App = () => (
       <Switch>
         <Route path="/about" exact component={About}/>
         <Route path="/" exact component={Home}/>
+        <Route path="/stats-details" exact component={StatsImplementationDetails}/>
+        <Route path="/stats-reports" exact component={StatsImplementationReports}/>
         <Route path="*" component={NotFound404}/>
       </Switch>
     </>
