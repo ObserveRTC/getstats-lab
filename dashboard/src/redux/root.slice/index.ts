@@ -1,48 +1,51 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {RootState} from "../store";
 import axios from "axios";
+import {chromeBrowserList, edgeBrowserList, firefoxBrowserList} from "./helper";
 
-export interface AppState {
-    value: number;
-    userJoined: boolean
+export type BrowserDetail = {
+    browser: string
+    version: string
 }
 
-const backendURL = 'http://localhost:3000'
-const initialState: AppState = {
-  value: 0,
-  userJoined: false
-};
+export interface AppState {
+    supportedBrowserList: BrowserDetail[],
+    stats: Record<string, unknown>
+}
 
-export const joinRoomAsync = createAsyncThunk(
-    'app/joinRoom',
- async (): Promise<boolean> => {
-      try{
-        await axios.get(`${backendURL}/123/join`)
-        return true
-      }catch (e) {
-        return false
-      }
+const initialState: AppState = {
+    supportedBrowserList: [...chromeBrowserList, ...firefoxBrowserList, ...edgeBrowserList],
+    stats: {}
+}
+
+const backendURL = 'http://localhost:8080'
+export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
+    'app/browserImplementationDetails',
+    async ({browser, version}: {browser: string, version: string}, {rejectWithValue}) => {
+        try{
+            const { data } = await axios.get(`${backendURL}/stats/browser/${browser}/version/${version}`)
+            return data
+        }catch (e) {
+            return rejectWithValue(e)
+        }
+
     }
 )
+
 export const appSlice = createSlice({
   name: 'app',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-        .addCase(joinRoomAsync.fulfilled, (state, action) => {
-          state.userJoined = action.payload;
-        });
+        .addCase(fetchBrowserImplementationDetailsAsync.fulfilled,
+            (state, action) => {
+            console.warn('->', 'fullfiled', action)
+            state.stats = action.payload;
+        })
   },
 });
 
-export const getValue = ({app}: RootState) => app.value
-export const { increment, decrement } = appSlice.actions;
-export const { reducer } = appSlice;
+export const selectBrowserList = (state: RootState) => state.app.supportedBrowserList
+//export const selectImplementationDetails = ({app}: RootState) => app.stats
+export const {reducer} = appSlice;
