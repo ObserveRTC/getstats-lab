@@ -40,8 +40,8 @@ export const appSlice = createSlice({
     builder
         .addCase(fetchBrowserImplementationDetailsAsync.fulfilled,
             (state, action) => {
-            console.warn('->', 'fullfiled', action)
-            state.stats = action.payload;
+            const {browser, version} = action.meta.arg
+            state.stats[`${browser}-${version}`] = action.payload;
         })
   },
 });
