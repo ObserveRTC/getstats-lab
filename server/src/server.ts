@@ -1,11 +1,13 @@
 import Fastify, { FastifyInstance } from 'fastify'
+import fastifyCors from 'fastify-cors'
 import {runBrowserStats} from './stats'
 import {getConfig} from './configs'
 const config = getConfig()
 
 const server: FastifyInstance = Fastify({
-    logger: true
+    logger: true,
 })
+server.register(fastifyCors)
 
 server.get('/stats/browser/:browser/version/:version', async (request, reply) => {
     const {browser, version} = request.params as any
