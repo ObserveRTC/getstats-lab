@@ -12,7 +12,7 @@ import {BrowserListView} from "../browser.list";
 const StatsImplementationDetails = (): React.ReactElement => {
     const dispatch = useAppDispatch();
     const browserList = useAppSelector(selectBrowserList)
-    const statsList = useAppSelector(selectImplementationDetails({browser: 'Chrome', version: '90' }))
+    const statsList = useAppSelector(selectImplementationDetails({browser: 'Chrome', version: '90'}))
 
     const onBrowserSelected = ({browser, version}: BrowserDetail) => {
         dispatch(fetchBrowserImplementationDetailsAsync({browser,version}))

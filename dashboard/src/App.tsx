@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,7 +6,7 @@ import {
 } from 'react-router-dom';
 import {About} from './components/about';
 import {Home} from './components/home';
-import { NotFound404 } from './components/NotFound404';
+import { NotFound404 } from './components/not.found.404';
 import {StatsImplementationDetails} from "./components/stats.implementation.details";
 import {StatsImplementationReports} from "./components/stats.implementation.reports";
 
