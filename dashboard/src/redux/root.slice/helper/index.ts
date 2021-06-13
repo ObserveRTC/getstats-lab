@@ -5,7 +5,7 @@ import {BrowserDetail} from "../index";
 
 const getBrowserList = (browserName: string, latestVersion: number): BrowserDetail[] => {
     const browserList: BrowserDetail[] =
-        [...Array(10)]
+        [...Array(7)]
             .map( (_, index): BrowserDetail => {
                 return {
                     browser: browserName,
@@ -15,7 +15,7 @@ const getBrowserList = (browserName: string, latestVersion: number): BrowserDeta
     return browserList
 }
 
-export const chromeBrowserList = getBrowserList('Chrome', 90)
-export const firefoxBrowserList = getBrowserList('Firefox', 89)
-export const edgeBrowserList = getBrowserList('Edge', 91)
+export const chromeBrowserList = getBrowserList('Chrome', 93)
+export const firefoxBrowserList = getBrowserList('Firefox', 90)
+export const edgeBrowserList = getBrowserList('Edge', 92)
 
