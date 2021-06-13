@@ -18,6 +18,9 @@
   },
   "compileOnSave": true,
   "include": [
-    "server/src/**/*"
+    "src/**/*"
+  ],
+  "exclude": [
+    "dist"
   ]
 }

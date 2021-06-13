@@ -5,5 +5,10 @@ function build_dashboard() {
     popd
 }
 
-
+function build_server() {
+  pushd server
+  npm ci
+  npm run build
+  popd
+}
 

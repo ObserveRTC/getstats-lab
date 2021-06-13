@@ -11,7 +11,7 @@ const server: FastifyInstance = Fastify({
 })
 server.register(fastifyCors)
 server.register(fastifyStatic, {
-    root: path.join(__dirname, '../public'),
+    root: path.join(__dirname, '../dashboard'),
     wildcard: false,
     prefix: '/',
 })
