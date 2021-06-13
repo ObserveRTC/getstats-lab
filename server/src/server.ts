@@ -1,13 +1,20 @@
 import Fastify, { FastifyInstance } from 'fastify'
 import fastifyCors from 'fastify-cors'
+import fastifyStatic from 'fastify-static'
 import {runBrowserStats} from './stats'
 import {getConfig} from './configs'
+import * as path from 'path'
 const config = getConfig()
 
 const server: FastifyInstance = Fastify({
     logger: true,
 })
 server.register(fastifyCors)
+server.register(fastifyStatic, {
+    root: path.join(__dirname, '../public'),
+    wildcard: false,
+    prefix: '/',
+})
 
 server.get('/stats/browser/:browser/version/:version', async (request, reply) => {
     const {browser, version} = request.params as any

@@ -29,6 +29,7 @@
     "commander": "^7.2.0",
     "fastify": "^3.17.0",
     "fastify-cors": "^6.0.1",
+    "fastify-static": "^4.2.2",
     "jsoning": "^0.11.21",
     "selenium-webdriver": "^4.0.0-beta.3"
   }
