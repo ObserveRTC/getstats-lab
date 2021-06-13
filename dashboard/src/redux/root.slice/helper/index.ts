@@ -15,7 +15,7 @@ const getBrowserList = (browserName: string, latestVersion: number): BrowserDeta
     return browserList
 }
 
-export const chromeBrowserList = getBrowserList('Chrome', 93)
-export const firefoxBrowserList = getBrowserList('Firefox', 90)
-export const edgeBrowserList = getBrowserList('Edge', 92)
+export const chromeBrowserList = getBrowserList('Chrome', 91)
+export const firefoxBrowserList = getBrowserList('Firefox', 89)
+export const edgeBrowserList = getBrowserList('Edge', 91)
 

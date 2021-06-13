@@ -17,7 +17,7 @@ const getCount = (statsList: StatsDetails): number => {
 
 const getStatus = (status: Status, browser: BrowserDetail): string => {
     if (status === Status.pending) {
-        return 'Fetching stats details ...'
+        return 'Fetching stats details [ will take around 30 seconds ]...'
     } else if (status === Status.rejected) {
         return 'Failed to fetch stats details! Please try later'
     } else if (status === Status.noop) {
