@@ -30,8 +30,8 @@ const initialState: AppState = {
     status: Status.noop
 }
 
-//const backendURL = 'http://localhost:8080'
-const backendURL = ''
+const backendURL = 'http://localhost:8080'
+//const backendURL = ''
 export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
     'app/browserImplementationDetails',
     async ({browser, version}: BrowserDetail, {rejectWithValue}) => {
@@ -46,6 +46,26 @@ export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
 
     }
 )
+
+export const fetchBrowserListImplementationDetailsAsync = createAsyncThunk(
+    'app/browserListImplementationDetails',
+    async ( browserDetails: BrowserDetail[], {rejectWithValue}) => {
+        try {
+            const promises = browserDetails.map(({browser, version}) => {
+                return axios.get(`${backendURL}/stats/browser/${browser}/version/${version}`, {
+                    timeout: 60 * 1000
+                })
+            })
+            const result = await Promise.all(promises)
+            return result.map( item => item.data)
+        } catch (e) {
+            return rejectWithValue(e)
+        }
+
+    }
+)
+
+
 
 export const appSlice = createSlice({
     name: 'app',
@@ -64,6 +84,21 @@ export const appSlice = createSlice({
                     state.status = Status.pending
                 })
             .addCase(fetchBrowserImplementationDetailsAsync.rejected,
+                (state, action) => {
+                    state.status = Status.rejected
+                })
+            .addCase(fetchBrowserListImplementationDetailsAsync.fulfilled,
+                (state, action) => {
+                    const [{browser: browserLeft, version:browserLeftVersion}, {browser: browserRight, version: browserRightVersion}] = action.meta.arg
+                    state.status = Status.fullfilled
+                    state.stats[`${browserLeft}-${browserLeftVersion}`] = action.payload[0];
+                    state.stats[`${browserRight}-${browserRightVersion}`] = action.payload[1];
+                })
+            .addCase(fetchBrowserListImplementationDetailsAsync.pending,
+                (state, action) => {
+                    state.status = Status.pending
+                })
+            .addCase(fetchBrowserListImplementationDetailsAsync.rejected,
                 (state, action) => {
                     state.status = Status.rejected
                 })
