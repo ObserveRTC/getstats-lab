@@ -12,6 +12,12 @@ type options = {
     port: string
 }
 export const getConfig = (): options => {
+    const port = process.env.PORT
+    if(port) {
+        process.argv.push('-p')
+        process.argv.push(`${port}`)
+    }
+    console.warn('->', process.argv)
     program.parse(process.argv)
     return program.opts() as options
 }
