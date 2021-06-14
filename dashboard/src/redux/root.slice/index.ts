@@ -36,7 +36,9 @@ export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
     'app/browserImplementationDetails',
     async ({browser, version}: BrowserDetail, {rejectWithValue}) => {
         try {
-            const {data} = await axios.get(`${backendURL}/stats/browser/${browser}/version/${version}`)
+            const {data} = await axios.get(`${backendURL}/stats/browser/${browser}/version/${version}`, {
+                timeout: 60 * 1000
+            })
             return data
         } catch (e) {
             return rejectWithValue(e)
