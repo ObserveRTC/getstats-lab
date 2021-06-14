@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {BrowserDetail, StatsDetails, Status} from "../../redux/root.slice";
 import styles from "./stats.implementation.diff.module.scss";
 // @ts-ignore
@@ -10,6 +10,7 @@ export type StatsImplementationDiffViewProps = {
     browserRight: BrowserDetail
     statsListLeft: StatsDetails
     statsListRight: StatsDetails
+    swapStats: (left: BrowserDetail, right: BrowserDetail) => void
 }
 
 const getCount = (statsList: StatsDetails): number => {
@@ -29,7 +30,7 @@ const getStatus = (status: Status, browserLeft: BrowserDetail, browserRight: Bro
                 <span>Stats diff for </span>
                 <u> {browserLeft.browser} {browserLeft.version} </u>
                 <span className={styles.divider}> | </span>
-                <u> {browserRight.browser} {browserRight.version} </u>
+                <u className={styles.fontBold}> {browserRight.browser} {browserRight.version} </u>
         </div>)
 }
 
@@ -39,8 +40,10 @@ const StatsImplementationDiffView = ({
     browserLeft,
     browserRight,
     statsListLeft,
-    statsListRight
+    statsListRight,
+    swapStats
 }: StatsImplementationDiffViewProps): React.ReactElement => {
+    const [show, setShow] = useState(false)
 
     return (
         <div className={styles.container}>
@@ -51,15 +54,19 @@ const StatsImplementationDiffView = ({
                 status === Status.fullfilled && statsListLeft && statsListRight &&
                 <>
                     <div className={styles.status}>
-                        <span>
-                            Total Stats : {getCount(statsListLeft)} <span> | </span> {getCount(statsListRight)}
-                        </span>
+                        <div>
+                            <input type="checkbox" name="details" className={styles.checkboxInput} checked={show} onChange={ () => setShow(!show)}/>
+                            <label htmlFor="details"> Details - Total Stats : {getCount(statsListLeft)} <span> | </span> {getCount(statsListRight)}</label>
+                        </div>
+                    </div>
+                    <div className={styles.status}>
+                        <button className={styles.swapStatsBtn} onClick={ () => swapStats(browserLeft, browserRight)}> Swap Stats </button>
                     </div>
                     <div className={styles.diffContainer}>
                         <JsonDiffReact
                             left={statsListLeft}
                             right={statsListRight}
-                            show={false}
+                            show={show}
                             objectHash={(obj: any) => obj.id || obj._id || obj.name || JSON.stringify(obj)}
                         />
                     </div>

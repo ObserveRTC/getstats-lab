@@ -34,6 +34,10 @@ const StatsImplementationDiff = (): React.ReactElement => {
         dispatch(fetchBrowserListImplementationDetailsAsync([browserLeft, {browser, version}]))
     }
 
+    const swapStats = (left: BrowserDetail, right: BrowserDetail) => {
+        setBrowserLeft(right)
+        setBrowserRight(left)
+    }
     return (
         <div className={styles.parentContainer}>
             <BrowserListView onSelected={onBrowserSelectedLeft} browserList={browserList}/>
@@ -44,6 +48,7 @@ const StatsImplementationDiff = (): React.ReactElement => {
                 statsListLeft={statsListLeft}
                 statsListRight={statsListRight}
                 status={status}
+                swapStats={swapStats}
             />
         </div>
     )
