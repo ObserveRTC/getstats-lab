@@ -29,7 +29,7 @@ server.get('/stats/browser/:browser/version/:version', async (request, reply) =>
 
 const start = async () => {
     try {
-        await server.listen(8080)
+        await server.listen(8080, '0.0.0.0')
     } catch (err) {
         server.log.error(err)
         process.exit(1)

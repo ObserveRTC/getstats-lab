@@ -5,8 +5,8 @@
   "description": "Just another space where we will play with getStats for different browser vendors and versions",
   "scripts": {
     "start-debug": "npx ts-node src/server.ts",
-    "build": "rm -rf dist && tsc",
-    "start": " node dist/server.js",
+    "build": "tsc",
+    "start": "node dist/server.js",
     "lint": "eslint --ext .ts .."
   },
   "repository": {
