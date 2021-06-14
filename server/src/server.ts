@@ -4,6 +4,7 @@ import fastifyStatic from 'fastify-static'
 import {runBrowserStats} from './stats'
 import {getConfig} from './configs'
 import * as path from 'path'
+import {sortStats} from './sort.stats'
 const config = getConfig()
 
 const server: FastifyInstance = Fastify({
@@ -24,7 +25,7 @@ server.get('/stats/browser/:browser/version/:version', async (request, reply) =>
         key: config.key,
         username: config.username,
     })
-    reply.send(stats)
+    reply.send(sortStats(stats))
 })
 
 const start = async () => {

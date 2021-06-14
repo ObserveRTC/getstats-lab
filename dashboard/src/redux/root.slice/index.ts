@@ -30,7 +30,8 @@ const initialState: AppState = {
     status: Status.noop
 }
 
-const backendURL = 'http://localhost:8080'
+//const backendURL = 'http://localhost:8080'
+const backendURL = ''
 export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
     'app/browserImplementationDetails',
     async ({browser, version}: BrowserDetail, {rejectWithValue}) => {
