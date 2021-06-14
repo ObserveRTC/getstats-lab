@@ -7,7 +7,7 @@ class StatsCollector {
         const statsList = []
         await demoApp.runApp(driver)
         // wait for 5 second
-        await wait(5)
+        await wait(3)
 
         for(let i = 0; i < times; i+= 1) {
             console.warn('>', 'gathering stats', i)
@@ -17,8 +17,8 @@ class StatsCollector {
             if(result) {
                 statsList.push( result)
             }
-            // wait for 3 second
-            await wait(3)
+            // wait for 1 second
+            await wait(1)
         }
         // just return the last stats
         return statsList?.[statsList.length -1 ]
