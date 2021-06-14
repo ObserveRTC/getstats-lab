@@ -1,6 +1,6 @@
 import Fastify, { FastifyInstance } from 'fastify'
 import fastifyCors from 'fastify-cors'
-import fastifyStatic from 'fastify-static'
+import fastifyStatic from '@vottuscode/fastify-vue-static'
 import {runBrowserStats} from './stats'
 import {getConfig} from './configs'
 import * as path from 'path'
