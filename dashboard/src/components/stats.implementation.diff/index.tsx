@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {
     BrowserDetail,
-    fetchBrowserImplementationDetailsAsync, fetchBrowserListImplementationDetailsAsync,
+    fetchBrowserListImplementationDetailsAsync,
     queryStatus,
     selectBrowserList,
     selectImplementationDetails
@@ -36,17 +36,15 @@ const StatsImplementationDiff = (): React.ReactElement => {
 
     return (
         <div className={styles.parentContainer}>
-            <div className={styles.container}>
-                <BrowserListView onSelected={onBrowserSelectedLeft} browserList={browserList}/>
-                <BrowserListView onSelected={onBrowserSelectedRight} browserList={browserList}/>
-                <StatsImplementationDiffView
-                    browserLeft={browserLeft}
-                    browserRight={browserRight}
-                    statsListLeft={statsListLeft}
-                    statsListRight={statsListRight}
-                    status={status}
-                />
-            </div>
+            <BrowserListView onSelected={onBrowserSelectedLeft} browserList={browserList}/>
+            <BrowserListView onSelected={onBrowserSelectedRight} browserList={browserList}/>
+            <StatsImplementationDiffView
+                browserLeft={browserLeft}
+                browserRight={browserRight}
+                statsListLeft={statsListLeft}
+                statsListRight={statsListRight}
+                status={status}
+            />
         </div>
     )
 }

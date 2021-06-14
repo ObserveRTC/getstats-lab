@@ -12,6 +12,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "axios": "^0.21.1",
+    "jsondiffpatch-for-react": "^1.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-json-inspector": "git+https://github.com/raptoria/react-json-inspector#upgrade-deps",
