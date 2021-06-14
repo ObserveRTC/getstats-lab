@@ -13,11 +13,20 @@ type options = {
 }
 export const getConfig = (): options => {
     const port = process.env.PORT
+    const username = process.env.USERNAME
+    const key = process.env.KEY
     if(port) {
         process.argv.push('-p')
         process.argv.push(`${port}`)
     }
-    console.warn('->', process.argv)
+    if(username) {
+        process.argv.push('-u')
+        process.argv.push(`${username}`)
+    }
+    if(key) {
+        process.argv.push('-k')
+        process.argv.push(`${key}`)
+    }
     program.parse(process.argv)
     return program.opts() as options
 }
