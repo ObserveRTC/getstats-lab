@@ -1,6 +1,9 @@
 # GetStats Lab 
 #### Just another space where we will play with getStats for different browser vendors and versions
 
+- #### GetStats implementation by browser vendor and version
+  - https://getstats-lab.herokuapp.com/stats-details
+
 ### Thanks
 
 - #### [BrowserStack](https://www.browserstack.com/)
