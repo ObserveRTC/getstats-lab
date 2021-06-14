@@ -10,6 +10,9 @@ const HomeView = (): React.ReactElement => {
                 <div className={styles.demo_container}>
                     <Link className={styles.demo_link} to={'/stats-details'}> Stats Implementation Details </Link>
                 </div>
+                <div className={styles.demo_container}>
+                    <Link className={styles.demo_link} to={'/stats-diff'}> Stats Implementation Diff </Link>
+                </div>
             </div>
         </div>
     );
