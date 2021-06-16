@@ -11,10 +11,10 @@ export const runBrowserStats = async ({
     key,
     username,
 }: {browser: SuppoertedBrowsers, version: string, key: string, username: string}) => {
-    // In replit, key and username will come from secret which is pass as environment variable in replit
-    if(await db.hasRecord({browser, version})) {
-        const data = await db.getRecord({browser,version})
-        return data
+
+    const record = await db.getRecord({browser, version})
+    if(record) {
+        return record
     }
     const demoApp = new JanusEchotestStats()
     const statsCollector = new StatsCollector()
