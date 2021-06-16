@@ -18,4 +18,5 @@ const getBrowserList = (browserName: string, latestVersion: number): BrowserDeta
 export const chromeBrowserList = getBrowserList('Chrome', 91)
 export const firefoxBrowserList = getBrowserList('Firefox', 89)
 export const edgeBrowserList = getBrowserList('Edge', 91)
+export const safariBrowserList = getBrowserList('Safari', 14)
 
