@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/ObserveRTC/getstats-lab#readme",
   "dependencies": {
+    "@google-cloud/datastore": "^6.4.1",
     "@replit/database": "^2.0.1",
     "@vottuscode/fastify-vue-static": "^3.2.1",
     "commander": "^7.2.0",
