@@ -1,0 +1,14 @@
+.headerViewRoot {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-start;
+  background-color: #F0F0F0;
+  height: 2rem;
+  > a {
+    align-self: center;
+    text-decoration: none;
+    color: #111111;
+    margin-left: 1rem;
+  }
+}

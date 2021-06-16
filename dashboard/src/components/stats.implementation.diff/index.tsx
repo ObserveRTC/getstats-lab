@@ -10,6 +10,7 @@ import {
 import styles from "./stats.implementation.diff.module.scss";
 import {BrowserListView} from "../browser.list";
 import {StatsImplementationDiffView} from "./stats.implementation.diff.view";
+import {HeaderView} from "../header";
 
 const StatsImplementationDiff = (): React.ReactElement => {
     const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ const StatsImplementationDiff = (): React.ReactElement => {
     }
     return (
         <div className={styles.parentContainer}>
+            <HeaderView/>
             <BrowserListView onSelected={onBrowserSelectedLeft} browserList={browserList}/>
             <BrowserListView onSelected={onBrowserSelectedRight} browserList={browserList}/>
             <StatsImplementationDiffView

@@ -9,6 +9,7 @@ import {
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {BrowserListView} from "../browser.list";
 import styles from './stats.implementation.details.module.scss'
+import {HeaderView} from "../header";
 
 const StatsImplementationDetails = (): React.ReactElement => {
     const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ const StatsImplementationDetails = (): React.ReactElement => {
 
     return (
         <div className={styles.parentContainer}>
+            <HeaderView/>
             <BrowserListView onSelected={onBrowserSelected} browserList={browserList}/>
             <StatsImplementationDetailsView statsList={statsList} status={status} browser={currentBrowser}/>
         </div>
