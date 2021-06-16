@@ -1,9 +1,22 @@
 import {Datastore} from '@google-cloud/datastore'
-
+const googAuth = process.env.GOOG_AUTH
 class GCDataStore {
     private readonly client: any
     constructor() {
-        this.client = new Datastore()
+        if(!googAuth) {
+            throw new Error('Google Firebase auth.json credential is required')
+        }
+        const auth = JSON.parse(Buffer.from(googAuth, 'base64').toString())
+        this.client = new Datastore({
+            namespace: 'rtcstats',
+            projectId: auth.project_id,
+            credentials: {
+                'type': auth.type,
+                'private_key': auth.private_key,
+                'client_email': auth.client_email,
+                'client_id': auth.client_id,
+            }
+        })
     }
     private key = ({browser, version}: {browser: string, version: string}) : string => {
         return `${browser}-${version}`
