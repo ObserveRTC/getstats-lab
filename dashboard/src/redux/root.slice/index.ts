@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {RootState} from "../store";
 import axios from "axios";
-import {chromeBrowserList, edgeBrowserList, firefoxBrowserList} from "./helper";
+import {chromeBrowserList, edgeBrowserList, firefoxBrowserList, standardStatsList} from "./helper";
 
 export type BrowserDetail = {
     browser: string
@@ -25,12 +25,12 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-    supportedBrowserList: [...chromeBrowserList, ...firefoxBrowserList, ...edgeBrowserList],
+    supportedBrowserList: [...standardStatsList, ...chromeBrowserList, ...firefoxBrowserList, ...edgeBrowserList],
     stats: {},
     status: Status.noop
 }
 
-//const backendURL = 'http://localhost:8080'
+// const backendURL = 'http://localhost:8080'
 const backendURL = ''
 export const fetchBrowserImplementationDetailsAsync = createAsyncThunk(
     'app/browserImplementationDetails',
