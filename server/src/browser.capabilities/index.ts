@@ -1,3 +1,5 @@
+import {isEqual} from '../helper.utils'
+
 const chromeBypassUserMediaOptions = {
     'goog:chromeOptions': {
         'args': ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream']
@@ -37,9 +39,6 @@ export type browser = {
     version: string
 }
 
-const isEqual = (left: string, right: string): boolean => {
-    return left.toLowerCase() === right.toLowerCase()
-}
 
 export const getBrowserCapabilities = ({
     browserName,

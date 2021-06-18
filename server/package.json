@@ -7,16 +7,19 @@
     "start-debug": "npx ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "lint": "eslint --ext .ts .."
+    "lint": "eslint --ext .ts ..",
+    "testparser": "npx ts-node src/standard.stats/index.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ObserveRTC/getstats-lab.git"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.29",
     "@types/fastify-cors": "^2.1.0",
     "@types/node": "^15.12.2",
     "@types/selenium-webdriver": "^4.0.13",
+    "@types/webidl2": "^23.13.5",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.1",
     "eslint": "^7.28.0",
@@ -31,11 +34,14 @@
     "@google-cloud/datastore": "^6.4.1",
     "@replit/database": "^2.0.1",
     "@vottuscode/fastify-vue-static": "^3.2.1",
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10",
     "commander": "^7.2.0",
     "fastify": "^3.17.0",
     "fastify-cors": "^6.0.1",
     "fastify-static": "^4.2.2",
     "jsoning": "^0.11.21",
-    "selenium-webdriver": "^4.0.0-beta.3"
+    "selenium-webdriver": "^4.0.0-beta.3",
+    "webidl2": "^24.1.1"
   }
 }
