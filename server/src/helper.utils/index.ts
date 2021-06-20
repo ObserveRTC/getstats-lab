@@ -7,3 +7,12 @@ export const safeAwait = async (fn: any): Promise<void> => {
         console.error(err)
     }
 }
+
+
+export const isEqual = (left: string, right: string): boolean => {
+    return left.toLowerCase() === right.toLowerCase()
+}
+
+export const isStandardStats = ( browser: string) => {
+    return isEqual('StandardStats', browser)
+}

@@ -5,6 +5,8 @@ import {runBrowserStats} from './stats'
 import {getConfig} from './configs'
 import * as path from 'path'
 import {sortStats} from './sort.stats'
+import {isStandardStats} from './helper.utils'
+import {parseStandardStats} from "./standard.stats";
 const config = getConfig()
 
 const server: FastifyInstance = Fastify({
@@ -18,12 +20,17 @@ server.register(fastifyStatic, {
 
 server.get('/stats/browser/:browser/version/:version', async (request, reply) => {
     const {browser, version} = request.params as any
-    const stats = await runBrowserStats({
-        browser,
-        version,
-        key: config.key,
-        username: config.username,
-    })
+    let stats: Record<string, any>
+    if(isStandardStats(browser)) {
+        stats = await parseStandardStats(version)
+    } else {
+        stats = await runBrowserStats({
+            browser,
+            version,
+            key: config.key,
+            username: config.username,
+        })
+    }
     reply.send(sortStats(stats))
 })
 
