@@ -15,7 +15,7 @@ import {HeaderView} from "../header";
 const StatsImplementationDetails = (): React.ReactElement => {
     const dispatch = useAppDispatch();
     const [currentBrowser, setCurrentBrowser] = useState<BrowserDetail>({
-        browser: '',
+        browser: 'StandardStats',
         version: ''
     })
     const browserList = useAppSelector(selectBrowserList)

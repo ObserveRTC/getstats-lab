@@ -30,21 +30,24 @@ const getBrowserOptions = (browserList: BrowserDetail[]): Option[] => browserLis
         }
     })
 
-const versionOptions = (browserList: BrowserDetail[], browserName?: string): Option[] => browserList?.filter(item => item.browser === browserName)
-    .map(item => item.version)
-    .reduce((acc: Array<string>, currentItem) => {
-        if(acc.includes(currentItem)){
-            return acc
-        } else {
-            return [...acc, currentItem]
-        }
-    }, [] )
-    .map( item => {
-        return {
-            label: item,
-            value: item
-        }
-    })
+const versionOptions = (browserList: BrowserDetail[], browserName?: string): Option[] => {
+    const versionList = browserList?.filter(item => item.browser === browserName)
+        .map(item => item.version)
+        .reduce((acc: Array<string>, currentItem) => {
+            if (acc.includes(currentItem)) {
+                return acc
+            } else {
+                return [...acc, currentItem]
+            }
+        }, [])
+        .map(item => {
+            return {
+                label: item,
+                value: item
+            }
+        })
+    return versionList
+}
 
 const fromBrowser = (browser: BrowserDetail) => {
     if(!browser.browser) return null
@@ -62,12 +65,14 @@ const fromVersion = (browser: BrowserDetail) => {
     }
 }
 
+
+
 const BrowserListView = ({onSelected, selectedBrowser, browserList}: StatsImplementationDetailsViewProps): React.ReactElement => {
 
     const browserOptions = getBrowserOptions(browserList)
-    const [currentBrowser, setCurrentBrowser] = useState<Option>(browserOptions?.[0])
-    const [currentVersion, setCurrentVersion] = useState<Option|null>(fromVersion(selectedBrowser))
-    const [versionList, setVersionList] = useState<Option[]>(versionOptions(browserList, currentBrowser?.value))
+    const [currentBrowser, setCurrentBrowser] = useState<Option|null>()
+    const [currentVersion, setCurrentVersion] = useState<Option|null>()
+    const [versionList, setVersionList] = useState<Option[]>()
 
     const onBrowserChange = (value: ValueType<Option, false>) => {
         const newValue = value as Option
@@ -79,11 +84,11 @@ const BrowserListView = ({onSelected, selectedBrowser, browserList}: StatsImplem
     const onVersionChange = (value: ValueType<Option, false>) => {
         const newValue = value as Option
         setCurrentVersion(newValue)
-        onSelected({version: newValue.value, browser: currentBrowser.value})
+        onSelected({version: newValue.value, browser: currentBrowser!.value})
     }
 
     useEffect(()=>{
-        setCurrentBrowser(fromBrowser(selectedBrowser) ?? browserOptions?.[0])
+        setCurrentBrowser(fromBrowser(selectedBrowser))
         setCurrentVersion(fromVersion(selectedBrowser))
         setVersionList(versionOptions(browserList, selectedBrowser.browser))
     }, [selectedBrowser.browser, selectedBrowser.version])

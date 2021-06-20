@@ -15,11 +15,11 @@ import {HeaderView} from "../header";
 const StatsImplementationDiff = (): React.ReactElement => {
     const dispatch = useAppDispatch();
     const [browserLeft, setBrowserLeft] = useState<BrowserDetail>({
-        browser: '',
-        version: ''
+        browser: 'StandardStats',
+        version: 'Published'
     })
     const [browserRight, setBrowserRight] = useState<BrowserDetail>({
-        browser: '',
+        browser: 'Chrome',
         version: ''
     })
     const browserList = useAppSelector(selectBrowserList)
