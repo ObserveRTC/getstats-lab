@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import {StatsImplementationDetailsView} from "./stats.implementation.details.view";
 import {
     BrowserDetail,
-    fetchBrowserImplementationDetailsAsync, queryStatus,
+    fetchBrowserImplementationDetailsAsync,
+    queryStatus,
     selectBrowserList,
     selectImplementationDetails
 } from "../../redux/root.slice";
@@ -23,13 +24,14 @@ const StatsImplementationDetails = (): React.ReactElement => {
 
     const onBrowserSelected = ({browser, version}: BrowserDetail) => {
         setCurrentBrowser({browser, version})
+        if(!browser || !version) return
         dispatch(fetchBrowserImplementationDetailsAsync({browser, version}))
     }
 
     return (
         <div className={styles.parentContainer}>
             <HeaderView/>
-            <BrowserListView onSelected={onBrowserSelected} browserList={browserList}/>
+            <BrowserListView onSelected={onBrowserSelected} browserList={browserList} selectedBrowser={currentBrowser}/>
             <StatsImplementationDetailsView statsList={statsList} status={status} browser={currentBrowser}/>
         </div>
 
