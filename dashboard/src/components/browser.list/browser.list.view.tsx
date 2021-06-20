@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserDetail} from "../../redux/root.slice";
 import Select from 'react-select'
 import {ValueType} from "react-select/src/types";
 import styles from './browser.list.view.module.scss'
 
 export type StatsImplementationDetailsViewProps = {
+    selectedBrowser: BrowserDetail,
     onSelected: (browser: BrowserDetail) => void
     browserList: BrowserDetail[]
 }
@@ -45,11 +46,27 @@ const versionOptions = (browserList: BrowserDetail[], browserName?: string): Opt
         }
     })
 
-const BrowserListView = ({onSelected, browserList}: StatsImplementationDetailsViewProps): React.ReactElement => {
+const fromBrowser = (browser: BrowserDetail) => {
+    if(!browser.browser) return null
+    return {
+        label: browser.browser,
+        value: browser.browser
+    }
+}
+
+const fromVersion = (browser: BrowserDetail) => {
+    if(!browser.browser) return null
+    return {
+        label: browser.version,
+        value: browser.version
+    }
+}
+
+const BrowserListView = ({onSelected, selectedBrowser, browserList}: StatsImplementationDetailsViewProps): React.ReactElement => {
 
     const browserOptions = getBrowserOptions(browserList)
     const [currentBrowser, setCurrentBrowser] = useState<Option>(browserOptions?.[0])
-    const [currentVersion, setCurrentVersion] = useState<Option|null>(null)
+    const [currentVersion, setCurrentVersion] = useState<Option|null>(fromVersion(selectedBrowser))
     const [versionList, setVersionList] = useState<Option[]>(versionOptions(browserList, currentBrowser?.value))
 
     const onBrowserChange = (value: ValueType<Option, false>) => {
@@ -64,6 +81,12 @@ const BrowserListView = ({onSelected, browserList}: StatsImplementationDetailsVi
         setCurrentVersion(newValue)
         onSelected({version: newValue.value, browser: currentBrowser.value})
     }
+
+    useEffect(()=>{
+        setCurrentBrowser(fromBrowser(selectedBrowser) ?? browserOptions?.[0])
+        setCurrentVersion(fromVersion(selectedBrowser))
+        setVersionList(versionOptions(browserList, selectedBrowser.browser))
+    }, [selectedBrowser.browser, selectedBrowser.version])
 
     return (
         <div className={styles.container}>

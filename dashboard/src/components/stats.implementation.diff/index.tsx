@@ -29,9 +29,14 @@ const StatsImplementationDiff = (): React.ReactElement => {
 
     const onBrowserSelectedLeft = ({browser, version}: BrowserDetail) => {
         setBrowserLeft({browser, version})
+        if(browserRight.browser && browserRight.version) {
+            // if the first browser change and second browser info is also available
+            dispatch(fetchBrowserListImplementationDetailsAsync([browserLeft, {browser, version}]))
+        }
     }
     const onBrowserSelectedRight = ({browser, version}: BrowserDetail) => {
         setBrowserRight({browser, version})
+        if(!browser || !version) return
         dispatch(fetchBrowserListImplementationDetailsAsync([browserLeft, {browser, version}]))
     }
 
@@ -39,11 +44,12 @@ const StatsImplementationDiff = (): React.ReactElement => {
         setBrowserLeft(right)
         setBrowserRight(left)
     }
+
     return (
         <div className={styles.parentContainer}>
             <HeaderView/>
-            <BrowserListView onSelected={onBrowserSelectedLeft} browserList={browserList}/>
-            <BrowserListView onSelected={onBrowserSelectedRight} browserList={browserList}/>
+            <BrowserListView onSelected={onBrowserSelectedLeft} browserList={browserList} selectedBrowser={browserLeft}/>
+            <BrowserListView onSelected={onBrowserSelectedRight} browserList={browserList} selectedBrowser={browserRight}/>
             <StatsImplementationDiffView
                 browserLeft={browserLeft}
                 browserRight={browserRight}
