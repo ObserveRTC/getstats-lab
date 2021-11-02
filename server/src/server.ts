@@ -6,7 +6,7 @@ import {getConfig} from './configs'
 import * as path from 'path'
 import {sortStats} from './sort.stats'
 import {isStandardStats} from './helper.utils'
-import {parseStandardStats} from "./standard.stats";
+import {parseStandardStats} from './standard.stats'
 const config = getConfig()
 
 const server: FastifyInstance = Fastify({

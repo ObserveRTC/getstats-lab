@@ -27,10 +27,10 @@ const getStandardStatsList = (): BrowserDetail[] => {
     }]
 }
 
-export const chromeBrowserList = getBrowserList('Chrome', 92)
-export const firefoxBrowserList = getBrowserList('Firefox', 90)
-export const edgeBrowserList = getBrowserList('Edge', 92)
-export const safariBrowserList = getBrowserList('Safari', 14)
+export const chromeBrowserList = getBrowserList('Chrome', 96)
+export const firefoxBrowserList = getBrowserList('Firefox', 94)
+export const edgeBrowserList = getBrowserList('Edge', 96)
+export const safariBrowserList = getBrowserList('Safari', 14.1)
 
 export const standardStatsList = getStandardStatsList()
 
