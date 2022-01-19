@@ -4,6 +4,13 @@
 - #### GetStats implementation by browser vendor and version
   - https://getstats-lab.herokuapp.com/stats-details
 
+- #### The project consist of two parts
+  - [Backend](/server)
+    - Handles API calls for the project
+  - [Frontend](/dashboard)
+    - A React based application dashboard
+
+
 ### Thanks
 
 - #### [BrowserStack](https://www.browserstack.com/)
